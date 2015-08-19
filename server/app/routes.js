@@ -17,12 +17,10 @@ module.exports = function(app) {
       });
     })
     .post(function(req, res) {
-      var contact = new Contact();
-      contact.name = req.body.name;
-      contact.save(function(err) {
+      Contact.create(req.body, function(err, post){
         if (err)
           res.send(err);
-        res.json({ message: 'Contact \'' + contact.name + '\' created'});
+        res.json(post);
       });
     });
 
@@ -35,24 +33,24 @@ module.exports = function(app) {
       });
     })
     .put(function(req, res) {
+      console.log(req.body);
       Contact.findById(req.params.contact_id, function(err, contact) {
         if (err)
           res.send(err);
-        contact.name = req.body.name;
-        contact.save(function(err) {
-          if (err)
-            res.send(err);
-          res.json({ message: 'Contact updated' });
-        });
+
+        for (var key in req.body) {
+          contact[key] = req.body[key];
+        }
+        contact.save();
+        res.json(contact);
       });
     })
     .delete(function(req, res) {
-      Contact.remove(
-        {_id: req.params.contact_id},
-        function(err, contact) {
+      Contact.findByIdAndRemove(req.params.contact_id,
+        function(err, post) {
           if (err)
             res.send(err);
-          res.json({ message: 'Successfully deleted' });
+          res.json(post);
         });
     });
 

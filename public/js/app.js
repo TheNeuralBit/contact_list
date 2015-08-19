@@ -30,6 +30,8 @@
     };
 
     result.update = function(id, contact) {
+      console.debug("Sending update:");
+      console.debug(contact);
       return $http.put('./api/contacts/' + id, contact);
     };
 

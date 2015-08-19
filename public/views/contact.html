@@ -3,7 +3,7 @@
     <input type="text" placeholder="Jim McMann" ng-model="contact.name"></input>
   </div>
   <div class="form-group">
-    <input type="phone" placeholder="(123)456-7890" ng-model="contact.phone"></input>
+    <input type="tel" placeholder="(123)456-7890" ng-model="contact.phone.unclass"></input>
   </div>
   <button type="submit" class="btn btn-default" ng-click="contacts_api.update(contact_id, contact)">Apply Changes</button>
 </form>
