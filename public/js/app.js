@@ -24,16 +24,33 @@
       else
         return $http.get('./api/contacts/' + id);
     };
+
+    result.create = function(contact) {
+      return $http.post('./api/contacts/', contact);
+    };
+
+    result.update = function(id, contact) {
+      return $http.put('./api/contacts/' + id, contact);
+    };
+
+    result.delete = function(id) {
+      return $http.delete('./api/contacts/' + id);
+    };
+
     return result;
   }]);
 
   app.controller('ContactListController', ['$scope', 'Contacts', function($scope, Contacts){
     console.log('Creating ContactListController');
+    $scope.contacts_api = Contacts;
     Contacts.get().success(function(data) { $scope.contacts = data; });
   }]);
+
   app.controller('ContactController', ['$scope', '$routeParams', 'Contacts', function($scope, $routeParams, Contacts){
     console.log('Creating ContactController');
-    Contacts.get($routeParams.contact_id).success(function(data) { $scope.contact = data; });
+    $scope.contacts_api = Contacts;
+    $scope.contact_id = $routeParams.contact_id;
+    Contacts.get($scope.contact_id).success(function(data) { $scope.contact = data; });
     console.log($scope.contact_id);
   }]);
 })();
