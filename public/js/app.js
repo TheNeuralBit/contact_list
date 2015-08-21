@@ -52,9 +52,15 @@
     console.log('Creating ContactController');
     $scope.contacts_api = Contacts;
     $scope.contact_id = $routeParams.contact_id;
-    //Contacts.get($scope.contact_id).success(function(data) { $scope.contact = data; });
-    $scope.selected_type = "unclass";
-    $scope.contact = {name: 'Brian Hulette', phones: [{type: 'unclass', phone: '(123)456-7890'}, {type: 'mobile', phone: '(789)123-4567'}]};
+    Contacts.get($scope.contact_id).success(function(data) { 
+      data = {name: 'Brian Hulette', phones: [{type: 'unclass', phone: '(123)456-7890'}, {type: 'mobile', phone: '(789)123-4567'}]};
+      $scope.contact = data; 
+      $scope.original_contact = angular.copy(data);
+    });
+    $scope.clean = true;
+    $scope.$watch('contact', function() {
+      $scope.clean =  angular.equals($scope.contact, $scope.original_contact); 
+    }, true);
   }]);
 
   app.filter('capitalize', function() {
