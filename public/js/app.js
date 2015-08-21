@@ -53,7 +53,11 @@
     $scope.contacts_api = Contacts;
     $scope.contact_id = $routeParams.contact_id;
     //Contacts.get($scope.contact_id).success(function(data) { $scope.contact = data; });
+    $scope.selected_type = "unclass";
     $scope.contact = {name: 'Brian Hulette', phones: {unclass: '(123)456-7890', mobile: '(789)123-4567'}};
+    $scope.selectType = function(new_type){
+      $scope.selected_type = new_type;
+    };
   }]);
 
   app.filter('capitalize', function() {
