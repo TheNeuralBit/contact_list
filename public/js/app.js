@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('ContactList', ['smart-table', 'ngRoute']);
+  var app = angular.module('ContactList', ['smart-table', 'ngRoute', 'ui.bootstrap']);
 
   app.config(['$routeProvider', function($routeProvider) {
     $routeProvider
@@ -55,4 +55,12 @@
     //Contacts.get($scope.contact_id).success(function(data) { $scope.contact = data; });
     $scope.contact = {name: 'Brian Hulette', phones: {unclass: '(123)456-7890', mobile: '(789)123-4567'}};
   }]);
+
+  app.filter('capitalize', function() {
+    return function(input, scope) {
+      if (input !== null)
+        input = input.toLowerCase();
+      return input.substring(0,1).toUpperCase() + input.substring(1);
+    };
+  });
 })();
