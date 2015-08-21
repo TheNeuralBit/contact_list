@@ -2,20 +2,8 @@
   <div class="form-group">
     <input class="form-control" type="text" placeholder="Jim McMann" ng-model="contact.name"></input>
   </div>
-  <div class="form-group">
-    <div class="input-group">
-      <div class="input-group-btn">
-      <div class="btn-group" dropdown auto-close="outsideClick" is-open="status.open">
-        <button id="phone-button" type="button" class="btn btn-default" dropdown-toggle>{{selected_type | capitalize}}<span
-            class="caret" style="margin-left: 0.5em"></span></button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="phone-button">
-          <li role="menuitem"  ng-repeat="(phone_type, _) in contact.phones"><span ng-click="status.open = false || selectType(phone_type)">{{phone_type | capitalize}}</span></li>
-          <li role="separator" class="divider">
-          <li role="menuitem"><span><input type="text" placeholder="New type"></input></span></li>
-        </ul>
-      </div>
-    </div>
-    <input class="form-control" type="tel" placeholder="(123)456-7890" ng-model="contact.phones[selected_type]"></input>
-  </div>
+  <object-input ng-model="contact.phones"></object-input>
+  <object-input ng-model="contact.phones"></object-input>
   <button type="submit" class="form-control btn btn-default" ng-click="contacts_api.update(contact_id, contact)">Apply Changes</button>
 </form>
+{{contact.phones}}
