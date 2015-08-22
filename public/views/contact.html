@@ -2,9 +2,8 @@
   <div class="form-group">
     <input class="form-control" type="text" placeholder="Jim McMann" ng-model="contact.name"></input>
   </div>
-  <object-input ng-model="contact.phones" key="type" value="phone"></object-input>
-  <object-input ng-model="contact.phones" key="type" value="phone"></object-input>
-  <object-input ng-model="contact.emails" key="type" value="email"></object-input>
+  <object-input ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
+  <object-input ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
+  <object-input ng-model="contact.emails" placeholder="joe@gmail.com" key="type" value="email"></object-input>
   <button type="submit" class="form-control btn btn-primary" ng-click="submit()" ng-disabled="clean">Apply Changes</button>
 </form>
-{{contact.phones}}

@@ -124,7 +124,7 @@
     return {
       restrict: 'E',
       replace: true,
-      scope: {object: '=', key: '@', value: '@'},
+      scope: {object: '=', placeholder: '@'},
       templateUrl: '/directives/dict_input.html',
       controller: 'ObjectInputController',
       require: 'ngModel',
