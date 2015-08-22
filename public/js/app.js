@@ -99,12 +99,14 @@
       $scope.original_contact = angular.copy(data);
     });
     $scope.clean = true;
-    $scope.$watch('contact', function() {
+    function check_clean() {
       $scope.clean =  angular.equals($scope.contact, $scope.original_contact); 
-    }, true);
+    }
+    $scope.$watch('contact', check_clean, true);
     $scope.submit = function submit() {
       Contacts.update(contact_id, $scope.contact).success(function(data) {
         $scope.original_contact = data;
+        check_clean();
       });
     };
   }]);
