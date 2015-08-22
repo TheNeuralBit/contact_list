@@ -96,16 +96,22 @@
   app.controller('ContactController', ['$scope', '$routeParams', 'Contacts', function($scope, $routeParams, Contacts){
     var contact_id = $routeParams.contact_id;
     Contacts.get(contact_id).success(function(data) { 
+      delete data._v;
       $scope.contact = data; 
       $scope.original_contact = angular.copy(data);
     });
     $scope.clean = true;
     function check_clean() {
       $scope.clean =  angular.equals($scope.contact, $scope.original_contact); 
+      console.log('checked clean');
+      console.log($scope.contact);
+      console.log($scope.original_contact);
+      console.log($scope.clean);
     }
     $scope.$watch('contact', check_clean, true);
     $scope.submit = function submit() {
       Contacts.update(contact_id, $scope.contact).success(function(data) {
+        delete data._v;
         $scope.original_contact = data;
         check_clean();
       });
