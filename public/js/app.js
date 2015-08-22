@@ -87,6 +87,7 @@
       $scope.contacts = [];
       for (var idx = 0; idx < data.length; idx++) {
         data[idx].phones = ConvertUtil.list_to_object(data[idx].phones, 'type', 'phone');
+        data[idx].emails = ConvertUtil.list_to_object(data[idx].emails, 'type', 'email');
         $scope.contacts.push(data[idx]);
       }
     });
@@ -123,23 +124,28 @@
     return {
       restrict: 'E',
       replace: true,
-      scope: {object: '='},
+      scope: {object: '=', key: '@', value: '@'},
       templateUrl: '/directives/dict_input.html',
       controller: 'ObjectInputController',
       require: 'ngModel',
       link: function(scope, element, attrs, ngModelController) {
+        var key   = attrs.key   || 'key';
+        var value = attrs.value || 'value';
+
+        scope.input_element = element.find('input')[0];
+
         // parser/formatter to convert between model and view format
         // model format: [{type: unclass, phone: 123}, {type: secure, phone: 456}]
         // view format: {keys: [unclass, secure], data: {unclass: 123, secure: 456}}
         ngModelController.$parsers.push(function(data) {
           //convert data from view format to model format
-          var rtrn = ConvertUtil.object_to_list(data, 'type', 'phone');
+          var rtrn = ConvertUtil.object_to_list(data, key, value);
           return rtrn;
         });
 
         ngModelController.$formatters.push(function(data) {
           //convert data from model format to view format
-          var rtrn = ConvertUtil.list_to_object(data, 'type', 'phone');
+          var rtrn = ConvertUtil.list_to_object(data, key, value);
           return rtrn;
         });
         
