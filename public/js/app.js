@@ -46,19 +46,34 @@
   app.factory('ConvertUtil', function(){
     result = {};
 
-    result.list_to_object = function list_to_object(lst) {
+    result.list_to_object = function list_to_object(lst, key_name, value_name) {
+      // Default values
+      if (key_name === undefined)
+        key_name = 'key';
+      if (value_name === undefined)
+        value_name = 'value';
+
       var obj = {keys: [], data: {}};
-      angular.forEach(lst, function(value) {
-        obj.keys.push(value.type);
-        obj.data[value.type] = value.phone;
+      angular.forEach(lst, function(item) {
+        obj.keys.push(item[key_name]);
+        obj.data[item[key_name]] = item[value_name];
       });
       return obj;
     };
 
-    result.object_to_list = function object_to_list(obj) {
+    result.object_to_list = function object_to_list(obj, key_name, value_name) {
+      // Default values
+      if (key_name === undefined)
+        key_name = 'key';
+      if (value_name === undefined)
+        value_name = 'value';
+
       var lst = [];
+      var item = {};
       angular.forEach(obj.keys, function(key) {
-        lst.push({type: key, phone: obj.data[key]});
+        item[key_name] = key;
+        item[value_name] = obj.data[key];
+        lst.push(angular.copy(item));
       });
       return lst;
     };
@@ -71,7 +86,7 @@
     Contacts.get().success(function(data) { 
       $scope.contacts = [];
       for (var idx = 0; idx < data.length; idx++) {
-        data[idx].phones = ConvertUtil.list_to_object(data[idx].phones);
+        data[idx].phones = ConvertUtil.list_to_object(data[idx].phones, 'type', 'phone');
         $scope.contacts.push(data[idx]);
       }
     });
@@ -116,13 +131,13 @@
         // view format: {keys: [unclass, secure], data: {unclass: 123, secure: 456}}
         ngModelController.$parsers.push(function(data) {
           //convert data from view format to model format
-          var rtrn = ConvertUtil.object_to_list(data);
+          var rtrn = ConvertUtil.object_to_list(data, 'type', 'phone');
           return rtrn;
         });
 
         ngModelController.$formatters.push(function(data) {
           //convert data from model format to view format
-          var rtrn = ConvertUtil.list_to_object(data);
+          var rtrn = ConvertUtil.list_to_object(data, 'type', 'phone');
           return rtrn;
         });
         
@@ -155,12 +170,13 @@
     };
 
     $scope.createNewType = function() {
-      if ($scope.new_tpye === '')
+      if ($scope.status.new_type === '')
         return;
-      $scope.keys.push($scope.status.new_type);
-      $scope.data[$scope.status.new_type] = '';
-      $scope.selectKey($scope.status.new_type);
+      var new_type = $scope.status.new_type.toLowerCase();
       $scope.status.new_type = '';
+      $scope.keys.push(new_type);
+      $scope.data[new_type] = '';
+      $scope.selectKey(new_type);
       $scope.status.open = false;
     };
   }]);
