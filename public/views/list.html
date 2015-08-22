@@ -2,8 +2,9 @@
   <thead>
     <tr>
       <th st-sort="name">Name</th>
-      <th st-sort="phone.unclass">Unclass Phone</th>
-      <th st-sort="phone.secure">Secure Phone</th>
+      <th st-sort="phone.data.unclass">Unclass Phone</th>
+      <th st-sort="phone.data.secure">Secure Phone</th>
+      <th st-sort="emails.data.unclass">Unclass e-mail</th>
       <th></th>
     </tr>
     <tr>
@@ -15,6 +16,7 @@
       <td>{{ contact.name }}</td>
       <td>{{ contact.phones.data.unclass }}</td>
       <td>{{ contact.phones.data.secure }}</td>
+      <td>{{ contact.emails.data.unclass }}</td>
       <td><a href="#/contact/{{ contact._id }}"><button class="btn btn-xs glyphicon glyphicon-pencil"></button></a></td>
     </r>
   </tbody>/
