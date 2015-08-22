@@ -118,15 +118,26 @@
         scope.$watch('data', updateView, true);
       }
     };
-  });
+  }]);
 
   app.controller('ObjectInputController', ['$scope', function($scope) {
     $scope.status = {
        open: false,
-       selected_key: ''
+       selected_key: '',
+       new_type: ''
        };
     $scope.selectKey = function(new_type){
       $scope.status.selected_key = new_type;
+    };
+
+    $scope.createNewType = function() {
+      if ($scope.new_tpye === '')
+        return;
+      $scope.keys.push($scope.status.new_type);
+      $scope.data[$scope.status.new_type] = '';
+      $scope.selectKey($scope.status.new_type);
+      $scope.status.new_type = '';
+      $scope.status.open = false;
     };
   }]);
 })();
