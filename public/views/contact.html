@@ -5,7 +5,6 @@
   <object-input ng-model="contact.phones"></object-input>
   <object-input ng-model="contact.phones"></object-input>
   <object-input ng-model="contact.emails"></object-input>
-  <object-input ng-model="contact.emails"></object-input>
-    <button type="submit" class="form-control btn btn-primary" ng-click="contacts_api.update(contact_id, contact)" ng-disabled="clean">Apply Changes</button>
+  <button type="submit" class="form-control btn btn-primary" ng-click="submit()" ng-disabled="clean">Apply Changes</button>
 </form>
-{{clean}}
+{{contact.phones}}
