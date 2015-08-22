@@ -167,6 +167,14 @@
     };
   }]);
 
+  app.directive('focusOn', function() {
+    return function(scope, elem, attr) {
+       scope.$on(attr.focusOn, function(e) {
+           elem[0].focus();
+       });
+    };
+  });
+
   app.controller('ObjectInputController', ['$scope', function($scope) {
     $scope.status = {
        open: false,
@@ -176,6 +184,7 @@
     $scope.selectKey = function(new_type){
       $scope.status.selected_key = new_type;
       $scope.status.open = false;
+      $scope.$broadcast('focusInput');
     };
 
     $scope.createNewType = function() {
