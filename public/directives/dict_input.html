@@ -6,7 +6,7 @@
           {{status.selected_key | capitalize}}<span class="caret" style="margin-left: 0.5em"></span>
         </button>
         <ul class="dropdown-menu" role="menu" aria-labelledby="phone-button">
-          <li role="menuitem"  ng-repeat="key in keys"><span ng-click="status.open = false || selectKey(key)">{{key | capitalize}}</span></li>
+          <li role="menuitem"  ng-repeat="key in keys"><span ng-click="selectKey(key)">{{key | capitalize}}</span></li>
           <li role="separator" class="divider">
           <li role="menuitem"><form ng-submit="createNewType()"><input type="text" placeholder="New type" ng-model="status.new_type"></input></form></li>
         </ul>

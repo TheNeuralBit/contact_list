@@ -175,6 +175,7 @@
        };
     $scope.selectKey = function(new_type){
       $scope.status.selected_key = new_type;
+      $scope.status.open = false;
     };
 
     $scope.createNewType = function() {
@@ -185,7 +186,6 @@
       $scope.keys.push(new_type);
       $scope.data[new_type] = '';
       $scope.selectKey(new_type);
-      $scope.status.open = false;
     };
   }]);
 })();
