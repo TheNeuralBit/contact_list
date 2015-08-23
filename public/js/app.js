@@ -118,7 +118,7 @@
     };
   }]);
 
-  app.controller('ContactController', ['$scope', '$routeParams', 'Contacts', function($scope, $routeParams, Contacts){
+  app.controller('ContactController', ['$scope', '$routeParams', 'Contacts', '$location', function($scope, $routeParams, Contacts, $location){
     var contact_id = $routeParams.contact_id;
     Contacts.get(contact_id).success(function(data) { 
       delete data._v;
@@ -140,6 +140,10 @@
         $scope.original_contact = data;
         check_clean();
       });
+    };
+    $scope.deleteContact = function deleteContact() {
+      Contacts.delete(contact_id);
+      $location.path('/');
     };
   }]);
 

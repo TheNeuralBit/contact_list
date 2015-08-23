@@ -1,9 +1,21 @@
+<h1>{{contact.name}}</h1>
 <form>
   <div class="form-group">
+    <label>Name</label>
     <input class="form-control" type="text" placeholder="Jim McMann" ng-model="contact.name"></input>
   </div>
-  <object-input ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
-  <object-input ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
-  <object-input ng-model="contact.emails" placeholder="joe@gmail.com" key="type" value="email"></object-input>
-  <button type="submit" class="form-control btn btn-primary" ng-click="submit()" ng-disabled="clean">Apply Changes</button>
+  <div class="form-group">
+    <label class="col-sm2 control-label">Phone</label>
+    <object-input class="col-sm10" ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
+    <object-input class="col-sm10" ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm2 control-label">Email</label>
+    <object-input class="col-sm10" ng-model="contact.emails" placeholder="joe@gmail.com" key="type" value="email"></object-input>
+  </div>
+  <div class="button-group form-inline">
+    <button type="submit" class="form-control btn btn-primary" ng-click="submit()" ng-disabled="clean">Apply Changes</button>
+    <button class="form-control btn btn-danger" ng-click="deleteContact()"><span class="glyphicon glyphicon-remove" style="margin-right: 0.5em"></span>Delete Contact</button>
+  </div>
 </form>
