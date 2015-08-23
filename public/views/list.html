@@ -13,7 +13,6 @@
         <th st-sort="emails.data.unclass">Unclass Email</th>
         <th st-sort="emails.data.secure">Secure Email</th>
         <th>Controls</th>
-        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -25,10 +24,9 @@
         <td>{{ contact.emails.data.secure }}</td>
         <td>
           <a href="#/contact/{{ contact._id }}"><button class="btn btn-xs glyphicon glyphicon-pencil"></button></a>
-          <button class="btn btn-xs glyphicon glyphicon-remove" ng-click="deleteContact(contact._id)"></button>
+          <button class="btn btn-xs btn-danger glyphicon glyphicon-remove" ng-click="deleteContact(contact._id)"></button>
         </td>
-      </r>
-    </tbody>/
-    <a href="#" class="btn btn-sm glyphicon glpyhicon-pencil" role="button"></a>
+      </tr>
+    </tbody>
   </table>
 </div>
