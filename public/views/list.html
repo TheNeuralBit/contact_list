@@ -1,24 +1,34 @@
-<table st-table="displayed_contacts" st-safe-src="contacts" class="table table-striped table-hover table-responsive">
-  <thead>
-    <tr>
-      <th st-sort="name">Name</th>
-      <th st-sort="phone.data.unclass">Unclass Phone</th>
-      <th st-sort="phone.data.secure">Secure Phone</th>
-      <th st-sort="emails.data.unclass">Unclass e-mail</th>
-      <th></th>
-    </tr>
-    <tr>
-      <th colspan="4"><input st-search placeholder="global search" class="input-sm form-control" type="search"></input></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="contact in displayed_contacts">
-      <td>{{ contact.name }}</td>
-      <td>{{ contact.phones.data.unclass }}</td>
-      <td>{{ contact.phones.data.secure }}</td>
-      <td>{{ contact.emails.data.unclass }}</td>
-      <td><a href="#/contact/{{ contact._id }}"><button class="btn btn-xs glyphicon glyphicon-pencil"></button></a></td>
-    </r>
-  </tbody>/
-  <a href="#" class="btn btn-sm glyphicon glpyhicon-pencil" role="button"></a>
-</table>
+<div st-table="displayed_contacts" st-safe-src="contacts">
+  <form class="form-inline">
+    <button class="btn btn-primary" ng-click="createNew()"><span class="glyphicon glyphicon-plus"></span> Add New Contact</button>
+    <input st-search class="form-control pull-right" type="text" placeholder="Search..." type="search" ng-model="search_value"></input>
+  </form>
+  <h3>{{ header }}</h3>
+  <table class="table table-striped table-hover table-responsive">
+    <thead>
+      <tr>
+        <th st-sort="name">Name</th>
+        <th st-sort="phone.data.unclass">Unclass Phone</th>
+        <th st-sort="phone.data.secure">Secure Phone</th>
+        <th st-sort="emails.data.unclass">Unclass Email</th>
+        <th st-sort="emails.data.secure">Secure Email</th>
+        <th>Controls</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="contact in displayed_contacts">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.phones.data.unclass }}</td>
+        <td>{{ contact.phones.data.secure }}</td>
+        <td>{{ contact.emails.data.unclass }}</td>
+        <td>{{ contact.emails.data.secure }}</td>
+        <td>
+          <a href="#/contact/{{ contact._id }}"><button class="btn btn-xs glyphicon glyphicon-pencil"></button></a>
+          <button class="btn btn-xs glyphicon glyphicon-remove" ng-click="deleteContact(contact._id)"></button>
+        </td>
+      </r>
+    </tbody>/
+    <a href="#" class="btn btn-sm glyphicon glpyhicon-pencil" role="button"></a>
+  </table>
+</div>
