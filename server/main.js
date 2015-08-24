@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 
 // CONFIGURATION
 var db = require('./config/db');
-var port = process.env.port || 8080;
+var port = process.env.PORT || 8080;
 
 // Uncomment after creating config/db.js
 console.log(process.env);

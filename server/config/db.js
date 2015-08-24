@@ -1,3 +1,3 @@
 module.exports = {
-  url: process.env.mongo_uri || 'mongodb://localhost/contact-list'
+  url: process.env.MONGO_URI || 'mongodb://localhost/contact-list'
 };
