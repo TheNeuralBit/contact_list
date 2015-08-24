@@ -1,6 +1,6 @@
 (function() {
   angular.module('ContactList')
-    .controller('ContactListController', ['$scope', 'Contacts', 'ConvertUtil', '$location', function($scope, Contacts, ConvertUtil, $location){
+    .controller('ContactListController', ['$scope', 'Contacts', 'ConvertUtil', '$location', 'DeleteModal', function($scope, Contacts, ConvertUtil, $location, DeleteModal){
       $scope.contacts_api = Contacts;
       $scope.refresh_contacts = function(data) {
         Contacts.get().success(function(data) { 
@@ -16,6 +16,8 @@
 
       $scope.header = "All Contacts";
       $scope.search_value = '';
+      $scope.deleteContact = DeleteModal.try_delete;
+
       $scope.$watch('search_value', function() {
         if ($scope.search_value === "") {
           $scope.header = "All Contacts";
@@ -23,11 +25,6 @@
           $scope.header = "Contacts Matching '" + $scope.search_value + "'";
         }
       });
-      $scope.deleteContact = function deleteContact(id) {
-        console.log('Deleting ' + id);
-        Contacts.delete(id);
-        $scope.refresh_contacts();
-      };
       $scope.createNew = function createNew() {
         Contacts.create({}).success(function(contact) {
           console.log('Created ' + contact._id + '!');
@@ -37,6 +34,13 @@
       $scope.viewContact = function viewContact(id) {
         $location.path('/contact/' + id);
       };
+
+      function deleteContact(id, contact) {
+        DeleteModal.try_delete(id, contact).then(function() {
+          // If contact is deleted, refresh current list of contacts
+          $scope.refresh_contacts();
+        });
+      }
     }]);
 })();
 

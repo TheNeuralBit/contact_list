@@ -16,7 +16,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="contact in displayed_contacts" ng-click="viewContact(contact._id)">
+      <!--<tr ng-repeat="contact in displayed_contacts" ng-click="viewContact(contact._id)">-->
+      <tr ng-repeat="contact in displayed_contacts">
         <td>{{ contact.name }}</td>
         <td>{{ contact.phones.data.unclass }}</td>
         <td>{{ contact.phones.data.secure }}</td>
@@ -24,7 +25,7 @@
         <td>{{ contact.emails.data.secure }}</td>
         <td>
           <a href="#/edit/{{ contact._id }}"><button class="btn btn-xs glyphicon glyphicon-pencil"></button></a>
-          <button class="btn btn-xs btn-danger glyphicon glyphicon-remove" ng-click="deleteContact(contact._id)"></button>
+          <button class="btn btn-xs btn-danger glyphicon glyphicon-remove" ng-click="deleteContact(contact)"></button>
         </td>
       </tr>
     </tbody>
