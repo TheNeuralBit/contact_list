@@ -5,7 +5,7 @@
 </div>
 
 <div ng-repeat="phone in contact.phones">
-  <b>{{phone.type}}: </b> {{phone.phone}}
+  <b>{{phone.type | capitalize}}: </b> {{phone.phone}}
 </div>
 
 <h3>Emails</h3>
@@ -13,5 +13,5 @@
   {{contact.name}} has no emails. <a href="#/edit/{{contact._id}}">Add one!</a>
 </div>
 <div ng-repeat="email in contact.emails">
-  <b>{{email.type}}: </b> {{email.email}}
+  <b>{{email.type | capitalize}}: </b> {{email.email}}
 </div>
