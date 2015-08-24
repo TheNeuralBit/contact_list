@@ -11,6 +11,10 @@
         templateUrl: './views/contact.html',
         controller: 'ContactController'
       })
+      .when('/edit/:contact_id', {
+        templateUrl: './views/edit.html',
+        controller: 'ContactController'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -112,9 +116,11 @@
     $scope.createNew = function createNew() {
       Contacts.create({}).success(function(contact) {
         console.log('Created ' + contact._id + '!');
-        var path = '/contact/' + contact._id;
-        $location.path(path);
+        $location.path('/edit/' + contact._id);
       });
+    };
+    $scope.viewContact = function viewContact(id) {
+      $location.path('/contact/' + id);
     };
   }]);
 

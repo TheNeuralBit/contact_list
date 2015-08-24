@@ -1,21 +1,17 @@
 <h1>{{contact.name}}</h1>
-<form>
-  <div class="form-group">
-    <label>Name</label>
-    <input class="form-control" type="text" placeholder="Jim McMann" ng-model="contact.name"></input>
-  </div>
-  <div class="form-group">
-    <label class="col-sm2 control-label">Phone</label>
-    <object-input class="col-sm10" ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
-    <object-input class="col-sm10" ng-model="contact.phones" placeholder="(NNN)NNN-NNNN" key="type" value="phone"></object-input>
-  </div>
+<h3>Phone Numbers</h3>
+<div ng-if="contact.phones.length == 0">
+  {{contact.name}} has no phone numbers. <a href="#/edit/{{contact._id}}">Add one!</a>
+</div>
 
-  <div class="form-group">
-    <label class="col-sm2 control-label">Email</label>
-    <object-input class="col-sm10" ng-model="contact.emails" placeholder="joe@gmail.com" key="type" value="email"></object-input>
-  </div>
-  <div class="button-group form-inline">
-    <button type="submit" class="form-control btn btn-primary" ng-click="submit()" ng-disabled="clean">Apply Changes</button>
-    <button class="form-control btn btn-danger" ng-click="deleteContact()"><span class="glyphicon glyphicon-remove" style="margin-right: 0.5em"></span>Delete Contact</button>
-  </div>
-</form>
+<div ng-repeat="phone in contact.phones">
+  <b>{{phone.type}}: </b> {{phone.phone}}
+</div>
+
+<h3>Emails</h3>
+<div ng-if="contact.emails.length == 0">
+  {{contact.name}} has no emails. <a href="#/edit/{{contact._id}}">Add one!</a>
+</div>
+<div ng-repeat="email in contact.emails">
+  <b>{{email.type}}: </b> {{email.email}}
+</div>

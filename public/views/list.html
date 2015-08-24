@@ -16,14 +16,14 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="contact in displayed_contacts">
+      <tr ng-repeat="contact in displayed_contacts" ng-click="viewContact(contact._id)">
         <td>{{ contact.name }}</td>
         <td>{{ contact.phones.data.unclass }}</td>
         <td>{{ contact.phones.data.secure }}</td>
         <td>{{ contact.emails.data.unclass }}</td>
         <td>{{ contact.emails.data.secure }}</td>
         <td>
-          <a href="#/contact/{{ contact._id }}"><button class="btn btn-xs glyphicon glyphicon-pencil"></button></a>
+          <a href="#/edit/{{ contact._id }}"><button class="btn btn-xs glyphicon glyphicon-pencil"></button></a>
           <button class="btn btn-xs btn-danger glyphicon glyphicon-remove" ng-click="deleteContact(contact._id)"></button>
         </td>
       </tr>
