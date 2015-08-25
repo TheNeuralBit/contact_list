@@ -41,6 +41,12 @@ describe('list to object filter', function() {
     expect(tricky_test).not.toThrow();
     expect(tricky_test()).toEqual(test_obj);
   });
+
+  it('adds item with no value keyword as undefined', function() {
+    var test_lst = [{key: 'a'}];
+    var test_obj = {keys: ['a'], data: {a: undefined}};
+    expect(listToObject(test_lst)).toEqual(test_obj);
+  });
 });
 
 describe('object to list filter', function() {
