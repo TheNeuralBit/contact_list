@@ -16,7 +16,7 @@
 
       $scope.header = "All Contacts";
       $scope.search_value = '';
-      $scope.deleteContact = DeleteModal.try_delete;
+      $scope.deleteContact = deleteContact;
 
       $scope.$watch('search_value', function() {
         if ($scope.search_value === "") {

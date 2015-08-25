@@ -1,6 +1,6 @@
 (function() {
   angular.module('ContactList')
-    .controller('ContactController', ['$scope', '$routeParams', 'Contacts', '$location', 'DeleteModal', function($scope, $routeParams, Contacts, $location, DeleteModal){
+    .controller('ContactController', ['$scope', '$routeParams', 'Contacts', '$location', 'DeleteModal', 'Alerter', function($scope, $routeParams, Contacts, $location, DeleteModal, Alerter){
       var contact_id = $routeParams.contact_id;
       $scope.contact = {};
       $scope.original_contact = {};
@@ -27,6 +27,7 @@
           delete data._v;
           $scope.original_contact = data;
           check_clean();
+          Alerter.addAlert('Contact saved!', 'success', 3000);
         });
       }
         

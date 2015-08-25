@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('ContactList', ['smart-table', 'ngRoute', 'ui.bootstrap']);
+  var app = angular.module('ContactList', ['alerter', 'smart-table', 'ngRoute', 'ui.bootstrap']);
 
   app.config(['$routeProvider', function($routeProvider) {
     $routeProvider

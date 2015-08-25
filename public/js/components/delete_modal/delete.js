@@ -14,7 +14,7 @@ angular.module('ContactList')
         $modalInstance.dismiss('cancel');
       }
     })
-  .factory('DeleteModal', ['$modal', '$q', 'Contacts', function($modal, $q, Contacts) {
+  .factory('DeleteModal', ['$modal', '$q', 'Contacts', 'Alerter', function($modal, $q, Contacts, Alerter) {
       factory = {};
       factory.try_delete = try_delete;
 
@@ -31,7 +31,10 @@ angular.module('ContactList')
 
       return delete_modal.result.then(function() {
           console.log('Deleting ' + contact._id);
+          // TODO: make sure he was actually deleted
           Contacts.delete(contact._id);
+          Alerter.addAlert('Contact \'' + contact.name + '\' deleted! Good. I hated that guy.', type='success', timeout=3000);
+          return $q.resolve();
         }, function(reason) {
           console.log("rejected!!");
           return $q.reject(reason);
