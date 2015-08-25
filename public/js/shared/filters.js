@@ -17,8 +17,10 @@
 
         var obj = {keys: [], data: {}};
         angular.forEach(lst, function(item) {
-          obj.keys.push(item[key_name]);
-          obj.data[item[key_name]] = item[value_name];
+          if (key_name in item) {
+            obj.keys.push(item[key_name]);
+            obj.data[item[key_name]] = item[value_name];
+          }
         });
         return obj;
       };
