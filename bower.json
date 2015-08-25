@@ -7,6 +7,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-smart-table": "latest",
-    "angular-bootstrap": "latest"
+    "angular-bootstrap": "latest",
+    "angular-mocks": "latest"
   }
 }
