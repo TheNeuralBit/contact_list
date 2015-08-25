@@ -1,13 +1,14 @@
 (function() {
   angular.module('ContactList')
-    .controller('ContactListController', ['$scope', 'Contacts', 'ConvertUtil', '$location', 'DeleteModal', function($scope, Contacts, ConvertUtil, $location, DeleteModal){
+    .controller('ContactListController', ['$scope', '$filter', '$location', 'Contacts', 'DeleteModal', function($scope, $filter, $location, Contacts, DeleteModal){
+      var listToObject = $filter('listToObject');
       $scope.contacts_api = Contacts;
       $scope.refresh_contacts = function(data) {
         Contacts.get().success(function(data) { 
           $scope.contacts = [];
           for (var idx = 0; idx < data.length; idx++) {
-            data[idx].phones = ConvertUtil.list_to_object(data[idx].phones, 'type', 'phone');
-            data[idx].emails = ConvertUtil.list_to_object(data[idx].emails, 'type', 'email');
+            data[idx].phones = listToObject(data[idx].phones, 'type', 'phone');
+            data[idx].emails = listToObject(data[idx].emails, 'type', 'email');
             $scope.contacts.push(data[idx]);
           }
         });

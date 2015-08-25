@@ -1,6 +1,6 @@
 (function() {
   angular.module('ContactList')
-    .directive('objectInput', ['ConvertUtil', function(ConvertUtil){
+    .directive('objectInput', ['$filter', function($filter){
       return {
         restrict: 'E',
         replace: true,
@@ -11,6 +11,8 @@
         link: function(scope, element, attrs, ngModelController) {
           var key   = attrs.key   || 'key';
           var value = attrs.value || 'value';
+          var objectToList = $filter('objectToList');
+          var listToObject = $filter('listToObject');
 
           scope.input_element = element.find('input')[0];
 
@@ -19,13 +21,13 @@
           // view format: {keys: [unclass, secure], data: {unclass: 123, secure: 456}}
           ngModelController.$parsers.push(function(data) {
             //convert data from view format to model format
-            var rtrn = ConvertUtil.object_to_list(data, key, value);
+            var rtrn = objectToList(data, key, value);
             return rtrn;
           });
 
           ngModelController.$formatters.push(function(data) {
             //convert data from model format to view format
-            var rtrn = ConvertUtil.list_to_object(data, key, value);
+            var rtrn = listToObject(data, key, value);
             return rtrn;
           });
           
